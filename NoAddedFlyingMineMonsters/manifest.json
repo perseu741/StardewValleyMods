@@ -1,0 +1,10 @@
+﻿{
+  "Name": "NoAddedFlyingMineMonsters",
+  "Author": "Drynwynn",
+  "Version": "0.2.0",
+  "Description": "Prevents flying monsters from randomly being added to the mine",
+  "UniqueID": "Drynwynn.NoAddedFlyingMineMonsters",
+  "EntryDll": "NoAddedFlyingMineMonsters.dll",
+  "MinimumApiVersion": "2.1.0-beta-20180630",
+  "UpdateKeys": []
+}
