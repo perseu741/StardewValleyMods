@@ -5,7 +5,14 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishingAutomaton", "FishingAutomaton\FishingAutomaton.csproj", "{204BF568-646C-4BDF-B398-CB8691259FD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoAddedFlyingMineMonsters", "NoAddedFlyingMineMonsters\NoAddedFlyingMineMonsters.csproj", "{396ACFAD-5DAF-4D51-98AD-FFCAAD3BBC83}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DsStardewLib", "DsStardewLib\DsStardewLib.shproj", "{F02B86A4-9981-40C6-B51C-E71B2D51D55D}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DsStardewLib\DsStardewLib.projitems*{f02b86a4-9981-40c6-b51c-e71b2d51d55d}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -15,6 +22,10 @@ Global
 		{204BF568-646C-4BDF-B398-CB8691259FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{204BF568-646C-4BDF-B398-CB8691259FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{204BF568-646C-4BDF-B398-CB8691259FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{396ACFAD-5DAF-4D51-98AD-FFCAAD3BBC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{396ACFAD-5DAF-4D51-98AD-FFCAAD3BBC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{396ACFAD-5DAF-4D51-98AD-FFCAAD3BBC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{396ACFAD-5DAF-4D51-98AD-FFCAAD3BBC83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
