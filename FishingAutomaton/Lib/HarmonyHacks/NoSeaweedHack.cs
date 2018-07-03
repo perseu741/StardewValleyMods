@@ -1,4 +1,5 @@
-﻿using Harmony;
+﻿using DsStardewLib.Utils;
+using Harmony;
 using StardewValley;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace FishingAutomaton.Lib.HarmonyHacks
   class NoSeaweedHack
   {
     public static ModConfig config;
-    public static Utils.Logger log;
+    public static Logger log;
 
     [HarmonyTranspiler]
     public static IEnumerable<CodeInstruction> SkipTheSeaweed(ILGenerator generator, MethodBase methodBase, IEnumerable<CodeInstruction> instructions)

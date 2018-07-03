@@ -4,7 +4,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace FishingAutomaton.Lib.Utils
+namespace DsStardewLib.Utils
 {
   /// <summary>
   /// Handle all logging for the application.  Mainly here as a gap between spurious logging
@@ -12,7 +12,7 @@ namespace FishingAutomaton.Lib.Utils
   /// is a factory that generates a logger for each class, but for this simple mod that was all
   /// yanked out and now it's a singleton.
   /// </summary>
-  class Logger
+  public class Logger
   {
     /*******************
     ** PUBLIC PROPS/VARS
@@ -65,7 +65,7 @@ namespace FishingAutomaton.Lib.Utils
       }
 
       // A simple singleton
-      return (Logger.log == null) ? Logger.log = new Logger() : log;
+      return (log == null) ? log = new Logger() : log;
     }
 
     /// <summary>
@@ -149,4 +149,3 @@ namespace FishingAutomaton.Lib.Utils
     }
   }
 }
-

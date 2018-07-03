@@ -9,5 +9,7 @@
     <Import_RootNamespace>DsStardewLib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SMAPI\DsModEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Log.cs" />
   </ItemGroup>
 </Project>

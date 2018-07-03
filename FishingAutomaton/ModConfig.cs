@@ -2,7 +2,7 @@
 
 namespace FishingAutomaton
 {
-  class ModConfig
+  public class ModConfig
   {
     // Test if notes go in the config file.
     public bool alwaysPerfect { get; set; } = false;

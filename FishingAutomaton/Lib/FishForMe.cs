@@ -1,4 +1,5 @@
-﻿using FishingAutomaton.Lib.HarmonyHacks;
+﻿using DsStardewLib.Utils;
+using FishingAutomaton.Lib.HarmonyHacks;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -23,7 +24,7 @@ namespace FishingAutomaton.Lib
 
     private IModHelper helper;
     private ModConfig config;
-    private Utils.Logger log;
+    private Logger log;
 
     private bool inFishingMenu = false;
     private bool catchingFishState = true;
@@ -72,7 +73,7 @@ namespace FishingAutomaton.Lib
     /// <param name="config"></param>
     public FishForMe(IModHelper helper, ModConfig config)
     {
-      this.log = Utils.Logger.GetLog();
+      this.log = Logger.GetLog();
 
       log.Silly("Creating FishForMe instance");
       this.helper = helper;
