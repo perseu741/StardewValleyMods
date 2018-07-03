@@ -1,4 +1,6 @@
-﻿using Harmony;
+﻿using DsStardewLib.Config;
+using DsStardewLib.Utils;
+using Harmony;
 using StardewValley;
 
 namespace FishingAutomaton.Lib.HarmonyHacks
@@ -7,8 +9,14 @@ namespace FishingAutomaton.Lib.HarmonyHacks
   /// Harmony class to patch the 'didPlayerJustClickAtAll' function
   /// </summary>
   [HarmonyPatch(typeof(Game1), "didPlayerJustClickAtAll")]
-  class ClickAtAllHack
+  class ClickAtAllHack : HarmonyHack
   {
+    // Variables to do the business, and also to meet the Hack interface.
+    private static ModConfig config = null;
+    private static Logger log = null;
+    public Logger Log { get => ClickAtAllHack.log; set => ClickAtAllHack.log = value; }
+    public HarmonyConfig Config { get => ClickAtAllHack.config; set => ClickAtAllHack.config = value as ModConfig; }
+
     /// <summary>
     /// Whether the function should simulate the user clicking.
     /// </summary>
@@ -24,6 +32,7 @@ namespace FishingAutomaton.Lib.HarmonyHacks
     static void YesPlayerDidClick(ref bool __result)
     {
       if (simulateClick) {
+        log?.Silly("Forcing a click");
         __result = true;
       }
     }
@@ -36,8 +45,14 @@ namespace FishingAutomaton.Lib.HarmonyHacks
   /// also being activated at the same time as the fishing game.
   /// </summary>
   [HarmonyPatch(typeof(Game1), "isOneOfTheseKeysDown")]
-  class IsButtonDownHack
+  class IsButtonDownHack : HarmonyHack
   {
+    // Variables to do the business, and also to meet the Hack interface.
+    private static ModConfig config = null;
+    private static Logger log = null;
+    public Logger Log { get => IsButtonDownHack.log; set => IsButtonDownHack.log = value; }
+    public HarmonyConfig Config { get => IsButtonDownHack.config; set => IsButtonDownHack.config = value as ModConfig; }
+
     /// <summary>
     /// Whether the function should simulate the user holding a button down.
     /// </summary>
@@ -56,6 +71,7 @@ namespace FishingAutomaton.Lib.HarmonyHacks
         foreach (InputButton key in keys) {
           foreach (InputButton key2 in Game1.options.useToolButton) {
             if (key.key == key2.key) {
+              log?.Silly("Forcing use tool button down");
               __result = true;
               return;
             }

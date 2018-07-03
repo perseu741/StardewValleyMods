@@ -1,13 +1,14 @@
-﻿using StardewModdingAPI;
+﻿using DsStardewLib.Config;
+using StardewModdingAPI;
 
 namespace NoAddedFlyingMineMonsters
 {
-  class ModConfig
+  class ModConfig : HarmonyConfig
   {
-    // Test if notes go in the config file.
-    public bool noRandomMonsters { get; set; } = true;
-    public SButton noRandomMonstersButton { get; set; } = SButton.None;
+    public bool HarmonyDebug { get; set; } = false;
+    public bool HarmonyLoad { get; set; } = true;
 
-    public bool loadHarmony { get; set; } = true;
+    public bool NoRandomMonsters { get; set; } = true;
+    public SButton NoRandomMonstersButton { get; set; } = SButton.None;
   }
 }

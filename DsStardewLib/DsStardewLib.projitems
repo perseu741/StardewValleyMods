@@ -9,7 +9,10 @@
     <Import_RootNamespace>DsStardewLib</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Config\HarmonyConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SMAPI\DsModEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\HarmonyHack.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\HarmonyWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Log.cs" />
   </ItemGroup>
 </Project>

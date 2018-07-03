@@ -1,35 +1,47 @@
-﻿using DsStardewLib.Utils;
+﻿using DsStardewLib.Config;
+using DsStardewLib.Utils;
 using Harmony;
 using StardewValley;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 
 namespace FishingAutomaton.Lib.HarmonyHacks
 {
+  /// <summary>
+  /// Removes the chance that trash can be returned when fishing.
+  /// </summary>
   [HarmonyPatch(typeof(GameLocation), "getFish", new Type[] { typeof(float), typeof(int), typeof(int), typeof(Farmer), typeof(double), typeof(string) })]
-  class NoTrashHack
+  class NoTrashHack : HarmonyHack
   {
-    public static ModConfig config;
-    public static Logger log;
+    // Variables to do the business, and also to meet the Hack interface.
+    private static ModConfig config = null;
+    private static Logger log = null;
+    public Logger Log { get => NoTrashHack.log; set => NoTrashHack.log = value; }
+    public HarmonyConfig Config { get => NoTrashHack.config; set => NoTrashHack.config = value as ModConfig; }
 
+    /// <summary>
+    /// The random check for trash is burned into the getFish function (without calling out to a separate function would could PostFix patch,
+    /// so remove the BR opcode after the check so it never branches to the trash option.
+    /// </summary>
+    /// <param name="instructions">Harmony var - the list of original instructions</param>
+    /// <returns>An enumerable of code instructions Harmony will inject.</returns>
     [HarmonyTranspiler]
-    public static IEnumerable<CodeInstruction> SkipTheTrash(ILGenerator generator, MethodBase methodBase, IEnumerable<CodeInstruction> instructions)
+    public static IEnumerable<CodeInstruction> SkipTheTrash(IEnumerable<CodeInstruction> instructions)
     {
-      log.Info("Starting IL Harmony injection for skipping trash");
+      log.Debug("Starting IL Harmony injection for skipping trash");
       List<CodeInstruction> allInst = instructions.ToList<CodeInstruction>();
 
       bool done = false;
       bool foundChanceVar = false;
 
       if (!config.noTrash) {
-        log.Info("Config option is false, skipping Harmony injection");
+        log.Debug("Config option is false, skipping Harmony injection");
         foreach (var ci in instructions) { yield return ci; }
       }
       else {
-        log.Info("Harmony injecting IL into getFish(float, int, int, Farmer, double, string) in GameLocation.cs");
+        log.Debug("Harmony injecting IL into getFish(float, int, int, Farmer, double, string) in GameLocation.cs");
         for (int i = 0; i < allInst.Count; ++i) {
           CodeInstruction ci = allInst[i];
 

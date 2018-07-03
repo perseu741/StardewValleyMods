@@ -7,17 +7,24 @@ using System.Reflection;
 
 namespace DsStardewLib.SMAPI
 {
+  /// <summary>
+  /// A class that is meant to be encapsulated in the Mod class.  Inheritence doesn't work here becuae SMAPI
+  /// will currently complain if more than one class deriving from 'Mod' (even in a singular chain) is included.
+  /// Therefore, include this class through composition and then call the Init method when ready.  It will set up
+  /// logging, configuration, and listening for Button presses for config options following the basic syntax.
+  /// </summary>
+  /// <typeparam name="TConfig"></typeparam>
   public class DsModHelper<TConfig> where TConfig : class, new()
   {
     private Logger log;
     private TConfig config;
-    private  List<PropertyInfo> configuredButtons = new List<PropertyInfo>();
-
     public Logger Log { get => log; private set => log = value; }
     public TConfig Config { get => config; private set => config = value; }
 
+    private List<PropertyInfo> configuredButtons = new List<PropertyInfo>();
+
     /// <summary>
-    /// Entry point for the mod.  Sets up logging, Harmony, and configuration, and preps the mod to fish.
+    /// Initialize configuration, logging, and key presses to enable/disable config options.
     /// </summary>
     /// <param name="helper"></param>
     public void Init(IModHelper helper, IMonitor monitor)

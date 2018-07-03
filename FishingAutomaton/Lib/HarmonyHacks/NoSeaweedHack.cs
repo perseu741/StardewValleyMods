@@ -1,24 +1,37 @@
-﻿using DsStardewLib.Utils;
+﻿using DsStardewLib.Config;
+using DsStardewLib.Utils;
 using Harmony;
 using StardewValley;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 
 namespace FishingAutomaton.Lib.HarmonyHacks
 {
+  /// <summary>
+  /// Patch the IL if a seaweed type if chosen by the random generator, loop until a real fish is caught.
+  /// </summary>
   [HarmonyPatch(typeof(GameLocation), "getFish", new Type[] { typeof(float), typeof(int), typeof(int), typeof(Farmer), typeof(double), typeof(string) })]
-  class NoSeaweedHack
+  class NoSeaweedHack : HarmonyHack
   {
-    public static ModConfig config;
-    public static Logger log;
+    // Variables to do the business, and also to meet the Hack interface.
+    private static ModConfig config = null;
+    private static Logger log = null;
+    public Logger Log { get => NoSeaweedHack.log; set => NoSeaweedHack.log = value; }
+    public HarmonyConfig Config { get => NoSeaweedHack.config; set => NoSeaweedHack.config = value as ModConfig; }
 
+    /// <summary>
+    /// Loop until we find the spot where the fish array has been randomized.  If the first entry there is seaweed, jump to the bottom
+    /// of the loop.  Since we don't know what that label is, place our own.
+    /// </summary>
+    /// <param name="generator">Harmony var - IL generator, used to place label</param>
+    /// <param name="instructions">Harmony var - the list of original instructions</param>
+    /// <returns>An enumerable of code instructions Harmony will inject.</returns>
     [HarmonyTranspiler]
-    public static IEnumerable<CodeInstruction> SkipTheSeaweed(ILGenerator generator, MethodBase methodBase, IEnumerable<CodeInstruction> instructions)
+    public static IEnumerable<CodeInstruction> SkipTheSeaweed(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
     {
-      log.Info("Starting IL Harmony injection for skipping seaweed");
+      log.Debug("Starting IL Harmony injection for skipping seaweed");
       List<CodeInstruction> allInst = instructions.ToList<CodeInstruction>();
 
       bool foundSetFish = false;
@@ -32,11 +45,11 @@ namespace FishingAutomaton.Lib.HarmonyHacks
       LocalBuilder loadLocalFish = null;
 
       if (!config.noSeaweed) {
-        log.Info("Config option is false, skipping Harmony injection");
+        log.Debug("NoSeaweed config option is false, skipping Harmony injection");
         foreach (var ci in instructions) { yield return ci; }
       }
       else {
-        log.Info("Harmony injecting IL into getFish(float, int, int, Farmer, double, string) in GameLocation.cs");
+        log.Debug("Harmony injecting IL into getFish(float, int, int, Farmer, double, string) in GameLocation.cs");
         for (int i = 0; i < allInst.Count; ++i) {
           CodeInstruction ci = allInst[i];
 
@@ -121,6 +134,9 @@ namespace FishingAutomaton.Lib.HarmonyHacks
       return -1;
     }
 
+    /// <summary>
+    /// The new instructions to inject at the appropriate spot.  Some of them need their operands set.
+    /// </summary>
     private static readonly CodeInstruction[] newCodes = new CodeInstruction[] { 
       new CodeInstruction(OpCodes.Ldc_I4_1),
       new CodeInstruction(OpCodes.Ldelem_Ref),

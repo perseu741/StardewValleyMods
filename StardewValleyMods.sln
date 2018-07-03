@@ -14,6 +14,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DsStardewLib\DsStardewLib.projitems*{204bf568-646c-4bdf-b398-cb8691259fd5}*SharedItemsImports = 4
+		DsStardewLib\DsStardewLib.projitems*{396acfad-5daf-4d51-98ad-ffcaad3bbc83}*SharedItemsImports = 4
 		DsStardewLib\DsStardewLib.projitems*{f02b86a4-9981-40c6-b51c-e71b2d51d55d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

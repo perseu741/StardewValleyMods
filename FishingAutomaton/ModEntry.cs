@@ -1,12 +1,10 @@
 ﻿using DsStardewLib.SMAPI;
 using DsStardewLib.Utils;
-using Harmony;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Tools;
 using System;
-using System.Reflection;
 
 namespace FishingAutomaton
 {
@@ -14,10 +12,11 @@ namespace FishingAutomaton
   public class ModEntry : Mod
   {
     private DsModHelper<ModConfig> modHelper = new DsModHelper<ModConfig>();
+    private HarmonyWrapper hWrapper = new HarmonyWrapper();
+
     private Logger log;
     private ModConfig config;
-
-    private HarmonyInstance harmony;
+    
     private Lib.FishForMe automaton;
 
     /// <summary>
@@ -29,23 +28,10 @@ namespace FishingAutomaton
       modHelper.Init(helper, this.Monitor);
       log = modHelper.Log;
       config = modHelper.Config;
-      log.Silly("Creating main class entry");
 
-      if (config.loadHarmony) {
-        log.Info("Loading Harmony and patching functions.  If something odd happens, check this mod first");
-
-        Lib.HarmonyHacks.NoSeaweedHack.config = config;
-        Lib.HarmonyHacks.NoSeaweedHack.log = log;
-        Lib.HarmonyHacks.NoTrashHack.config = config;
-        Lib.HarmonyHacks.NoTrashHack.log = log;
-        Lib.HarmonyHacks.NoTrashLavaMineHack.config = config;
-
-        // Only one patch file so have it patch everything instead of doing manual thing.
-        HarmonyInstance.DEBUG = false;
-        harmony = HarmonyInstance.Create(helper.ModRegistry.ModID);
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
-      }
-
+      log.Silly("Created log and config for mod entry.  Loading Harmony.");
+      hWrapper.InitHarmony(helper, config, log);
+      
       log.Silly("Loading event handlers");
       GameEvents.UpdateTick += new EventHandler(OnUpdateTick);
       GameEvents.HalfSecondTick += new EventHandler(OnHalfSecondTick);

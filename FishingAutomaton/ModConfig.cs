@@ -1,9 +1,13 @@
-﻿using StardewModdingAPI;
+﻿using DsStardewLib.Config;
+using StardewModdingAPI;
 
 namespace FishingAutomaton
 {
-  public class ModConfig
+  public class ModConfig : HarmonyConfig
   {
+    public bool HarmonyDebug { get; set; } = false;
+    public bool HarmonyLoad { get; set; } = true;
+
     // Test if notes go in the config file.
     public bool alwaysPerfect { get; set; } = false;
     public SButton alwaysPerfectButton { get; set; } = SButton.None;
