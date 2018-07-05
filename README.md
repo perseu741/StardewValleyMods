@@ -2,8 +2,8 @@
 
 A collection of my mods for [Stardew Valley](https://stardewvalley.net/).  See the mod directories for more information.
 
-[Fishing Automaton](./FishingAutomaton) - Play the fishing game (kind of) like an actual human.
-[No Added Flying Mine Monsters](./NoAddedFlyingMineMonsters) - Remove the random monsters that appear off screen inside the mines.
+[Fishing Automaton](./FishingAutomaton) - Play the fishing game (kind of) like an actual human.\
+[No Added Flying Mine Monsters](./NoAddedFlyingMineMonsters) - Remove the random monsters that appear off screen inside the mines.\
 [D's Stardew Library](./DsStardewLib) - A shared library of common code used in the mods.
 
 ## Using the Source
