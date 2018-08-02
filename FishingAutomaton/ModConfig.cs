@@ -5,9 +5,6 @@ namespace FishingAutomaton
 {
   public class ModConfig : HarmonyConfig
   {
-    public bool HarmonyDebug { get; set; } = false;
-    public bool HarmonyLoad { get; set; } = true;
-
     // Test if notes go in the config file.
     public bool alwaysPerfect { get; set; } = false;
     public SButton alwaysPerfectButton { get; set; } = SButton.None;
@@ -31,7 +28,7 @@ namespace FishingAutomaton
     /// <remarks>
     /// Any treasure will be lost if your inventory is full.  Also clearing the caught fish
     /// popup requires the use of Harmony due to how the game is coded, so autofinish will only
-    /// process the treasure if loadHarmony is false.
+    /// process the treasure if HarmonyLoad is false.
     /// </remarks>
     public bool autoFinish { get; set; } = true;
     public SButton autoFinishButton { get; set; } = SButton.None;
@@ -68,11 +65,13 @@ namespace FishingAutomaton
     public bool catchTreasure { get; set; } = true;
     public SButton catchTreasureButton { get; set; } = SButton.None;
 
+    public bool HarmonyDebug { get; set; } = false;
+
     /// <summary>
     /// Harmony is required to dismiss the caught fish popup and to play the minigame.  If this is
     /// set to false, neither will operate.
     /// </summary>
-    public bool loadHarmony { get; set; } = true;
+    public bool HarmonyLoad { get; set; } = true;
 
     /// <summary>
     /// If the power bar during casting should always generate "Max" power

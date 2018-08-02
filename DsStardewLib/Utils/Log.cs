@@ -90,7 +90,14 @@ namespace DsStardewLib.Utils
 
     public string Debug(string msg = "", [CallerMemberName] string callerName = "", [CallerFilePath] string callerPath = "")
     {
+      // Pathos advised that he likes debug to show by default in the console window and we should limit output to trace.
+      // I don't personally agree with this; IMO log level in Release should be set to INFO, but it's not my API, so comply with
+      // tool norms.
+#if DEBUG
       return Log(msg, LogLevel.Debug, callerName, callerPath);
+#else
+      return Log(msg, LogLevel.Trace, callerName, callerPath);
+#endif
     }
 
     public string Error(string msg = "", [CallerMemberName] string callerName = "", [CallerFilePath] string callerPath = "")

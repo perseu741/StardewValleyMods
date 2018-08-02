@@ -32,12 +32,6 @@ namespace DsStardewLib.Utils
     /// <param name="msg">What piece is being patched.  Class#method is a good idea.</param>
     public void InitHarmony(IModHelper helper, HarmonyConfig config, Logger log)
     {
-      // Only run this function once.
-      if (hInstance != null) {
-        log?.Warn("InitHarmony called more than once.");
-        return;
-      }
-
       if (config == null || log == null) {
         log.Error("Must provide a configuration and a logger to load Harmony");
         return;
@@ -45,6 +39,12 @@ namespace DsStardewLib.Utils
 
       log.Trace("Checking if Harmony is configured to be initialized");
 #if INCLUDEHARMONY
+      // Only run this function once.
+      if (hInstance != null) {
+        log?.Warn("InitHarmony called more than once.");
+        return;
+      }
+
       if (config.HarmonyLoad) {
         log.Silly("Enumerating through classes to find harmony hacks and set the log and config");
         foreach (var t in GetHarmonyHacks(Assembly.GetExecutingAssembly())) {

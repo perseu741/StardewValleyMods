@@ -171,7 +171,7 @@ namespace FishingAutomaton.Lib
           log.Trace("Tool is sitting at caught fish popup");
           doneCaughtFish = true;
 
-          if (config.autoFinish && config.loadHarmony) {
+          if (config.autoFinish && config.HarmonyLoad) {
             log.Trace("Closing popup with Harmony");
             ClickAtAllHack.simulateClick = true;
           }

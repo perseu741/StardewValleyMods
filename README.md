@@ -23,7 +23,7 @@ unpack it, and add the resulting repository to your NuGet configuration.
 ## Built With
 
 * [SMAPI](https://smapi.io/) - Stardew Valley Modding API
-* [Maven](https://github.com/pardeike/Harmony) - Non-destructive IL injection
+* [Harmony](https://github.com/pardeike/Harmony) - Non-destructive IL injection
 
 ## Contributing
 
