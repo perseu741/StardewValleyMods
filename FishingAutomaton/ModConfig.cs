@@ -20,7 +20,7 @@ namespace FishingAutomaton
     /// Highly recommend setting autoCastButton so this value can be toggled easily.
     /// </summary>
     public bool autoCast { get; set; } = false;
-    public SButton autoCastButton { get; set; } = SButton.N;
+    public SButton autoCastButton { get; set; } = SButton.L;
 
     /// <summary>
     /// Auto finish will clear the caught fish popup and take any treasure that was caught.
